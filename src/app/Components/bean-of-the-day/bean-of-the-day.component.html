@@ -1,0 +1,8 @@
+
+<div id="BeanOfTheDay" style="margin-top: 55px;">
+    <a *ngIf="bean != null" routerLink="/bean">
+        <h1>Our bean of the day is : {{ bean.name }}</h1>
+    </a>
+    <p *ngIf="bean == null">There is no bean of the day today!</p>
+</div>
+

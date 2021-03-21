@@ -1,0 +1,98 @@
+
+<h2>Add Bean</h2> 
+ <table class="table">
+    <thead  class="thead-dark">
+      <tr>
+        <th scope="col">Bean ID</th>
+        <th scope="col">Bean Name</th>
+        <th scope="col">Bean Aroma</th>
+        <th scope="col">Bean Colour</th>
+        <th scope="col">Bean Cost (Per 100g)</th>
+      </tr>
+    </thead>
+
+    <tr *ngFor="let bean of beans">
+      <td>{{bean.id}}</td>
+      <td>{{bean.name}}</td>
+      <td>{{bean.aroma}}</td>
+      <td>{{bean.colour}}</td>
+      <td>£{{bean.cost}}</td>
+    </tr>
+  </table>
+
+
+  <form>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="beanName">Bean Name</label>
+          <input #beanName placeholder="Enter Bean Name" class="form-control" />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="beanCost">Cost Per 100g</label>
+          <input #beanCost type="number" placeholder="Enter Bean Cost" class="form-control" />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="beanAroma">Bean Aroma</label>
+          <input #beanAroma placeholder="Enter Bean Aroma" class="form-control" />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+        <label for="beanColour">Bean Colour</label>
+        <input #beanColour placeholder="Enter Bean Colour" class="form-control" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="beanFileUpload">Bean Image</label>
+      <input type="file" class="form-control-file file-upload" (change)="onFileChanged($event)" id="beanFileUpload">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="addBean(beanName.value, beanAroma.value,beanColour.value,beanCost.value, $event)">Submit</button>
+  </form>
+
+  <hr>
+
+  <h2 style="margin-top: 35px;">Add Bean of The Day</h2> 
+  <table class="table">
+    <thead  class="thead-dark">
+      <tr>
+        <th scope="col">Bean ID</th>
+        <th scope="col">Bean Date</th>
+        <th scope="col">Remove</th>
+      </tr>
+    </thead>
+
+    <tr *ngFor="let bean of beansOfTheDay">
+      <td>{{bean.beanId}}</td>
+      <td>{{bean.date | date: "dd/MM/yyyy"}}</td>
+      <td><button class="delete btn btn-danger" title="Delete bean" (click)="delete(bean.id)">x</button></td>
+    </tr>
+  </table>
+
+  <form>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="beanID">Bean ID</label>
+          <select #beanID class="form-control" placeholder="Enter Bean ID" >
+            <option *ngFor="let bean of beans">{{bean.id}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="beanDate">Date</label>
+          <input #beanDate type="date" placeholder="DD/MM/YYYY" class="form-control" required pattern="\d{2}-\d{2}-\d{4}"/>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="addBeanOfTheDay(beanID.value,beanDate.value,$event)">Submit</button>
+  </form>
+  

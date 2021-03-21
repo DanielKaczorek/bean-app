@@ -1,0 +1,12 @@
+<a routerLink="/">Back</a>
+
+<div id="productInfo" style="border:1px solid;padding: 10px;min-width: 350px;" *ngIf="bean != null">
+    <img src="{{bean.image}}" style="height:250px;margin:auto;display: block;"/>
+
+
+    <h2>{{ bean.name }}</h2>
+    <p>Aroma: {{ bean.aroma }}</p>
+    <p>Cost per 100g: {{ bean.cost }}</p>
+    <p>Colour: {{ bean.colour }}</p>
+    
+</div>
