@@ -1,12 +1,16 @@
-<a routerLink="/">Back</a>
+<a routerLink="/">
+    <h3 style="text-align: center;">Go Back</h3>
+</a>
 
 <div id="productInfo" style="border:1px solid;padding: 10px;min-width: 350px;" *ngIf="bean != null">
     <img src="{{bean.image}}" style="height:250px;margin:auto;display: block;"/>
 
 
-    <h2>{{ bean.name }}</h2>
-    <p>Aroma: {{ bean.aroma }}</p>
-    <p>Cost per 100g: {{ bean.cost }}</p>
-    <p>Colour: {{ bean.colour }}</p>
+    <h2 style="text-align: center;">{{ bean.name }}</h2>
+    <p><b>Aroma:</b> {{ bean.aroma }}</p>
+    <p><b>Cost per 100g:</b> £{{ bean.cost }}</p>
+    <p><b>Colour:</b> {{ bean.colour }}</p>
     
 </div>
+
+

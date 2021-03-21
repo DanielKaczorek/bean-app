@@ -41,7 +41,6 @@ export class AdminComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    console.log("heyooo");
     this.fileToUpload = event.target.files[0];
 
     this.beanService.postFile(this.fileToUpload).subscribe(event => {
@@ -57,10 +56,17 @@ export class AdminComponent implements OnInit {
     $event.preventDefault();
     if (this.imgUrl == null)
       {
-        alert("Please add an iamge first");
+        alert("Please add an image first");
         return;
       }
       else {
+
+        if (name == "" || aroma == "" || beanCost == "")
+        {
+          alert("Fill in all required fields first");
+          return;
+        }
+
         const cost = Number(beanCost);
         const image = this.imgUrl;
 
@@ -73,6 +79,7 @@ export class AdminComponent implements OnInit {
 
   addBeanOfTheDay(beanIdString: string, paramDate: string, $event) : void {
     $event.preventDefault();
+    
     if (paramDate === null || paramDate == "")
     {
       alert("Date cannot be empty");
@@ -83,9 +90,37 @@ export class AdminComponent implements OnInit {
       alert("Date format isnt correct");
       return;
     }
+      let nowDate = new Date();
+      var nowDateString = nowDate.toDateString();
+      nowDate = new Date(nowDateString);
 
       const date = new Date(paramDate);
       const beanId = Number(beanIdString);
+
+      console.log(date);
+      console.log(nowDate);
+
+      if (date < nowDate)
+      {
+        alert("Date cannot be in the past");
+        return; 
+      }
+
+      var alreadyExists = false;
+      for (let i = 0;this.beansOfTheDay.length > i;i++)
+      {
+        if (new Date(this.beansOfTheDay[i].date).toISOString() == date.toISOString())
+        {
+          alreadyExists = true;
+          break;
+        }
+      }
+
+      if (alreadyExists)
+      {
+        alert("There is already a bean of the day for that day.");
+        return;
+      }
 
       this.beanService.addBeanOfTheDay({ beanId,date } as BeanOfTheDay)
         .subscribe(bean => {
